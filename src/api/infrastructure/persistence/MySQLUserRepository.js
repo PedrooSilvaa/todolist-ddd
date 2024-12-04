@@ -21,6 +21,21 @@ class MySQLUserRepository extends UserRepository {
     const users = await User.create(user);
     return users;
   }
+
+  async deleteById(id){
+    const user = this.getById(id)
+    if(!user){
+      throw new Error("User not found")
+    }
+    try{
+      await User.destroy({
+        where: {id: id}
+      });
+      return "User deleted successfully"
+    } catch(error){
+      throw new Error('Error fetching user by ID: ' + error.message); 
+    }
+  } 
 }
 
 export default MySQLUserRepository;

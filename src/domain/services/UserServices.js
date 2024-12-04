@@ -14,6 +14,10 @@ class UserService{
     async createUser(id){
         return await this.userRepository.createUser(user);
     }
+
+    async deleteById(id){
+        return await this.userRepository.deleteById(id);
+    }
 }
 
 export default UserService;

@@ -1,8 +1,9 @@
 class UserController {
-  constructor(getAllUsers, getUserById, createUser) {
+  constructor(getAllUsers, getUserById, createUser, deleteById) {
     this.getAllUsers = getAllUsers;
     this.getUserById = getUserById;
     this.createUser = createUser;
+    this.deleteById = deleteById;
   }
 
   async getAll(req, res) {
@@ -17,7 +18,7 @@ class UserController {
   async getById(req, res) {
     try {
       let id = req.params.id;
-      const user = await this.getUserById.execute(id); // Usando o nome correto da variável
+      const user = await this.getUserById.execute(id);
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
       }
@@ -38,6 +39,19 @@ class UserController {
         return res.status(400).json({ error: 'Invalid data' });
       }
       res.status(201).json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  async deleteUserById(req, res) {
+    try {
+      let id = req.params.id;
+      const user = await this.deleteById.execute(id);
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      res.status(200).json(user);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
