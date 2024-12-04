@@ -10,6 +10,10 @@ class UserService{
     async getById(id){
         return await this.userRepository.getById(id);
     }
+
+    async createUser(id){
+        return await this.userRepository.createUser(user);
+    }
 }
 
 export default UserService;

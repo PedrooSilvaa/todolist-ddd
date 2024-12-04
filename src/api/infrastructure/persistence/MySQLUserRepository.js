@@ -9,12 +9,17 @@ class MySQLUserRepository extends UserRepository {
   async getById(id) {
     try {
       const user = await User.findOne({
-        where: { id: id }  // Filtrando o usuário pelo ID
+        where: { id: id }  
       });
-      return user;  // Retorna o usuário encontrado
+      return user; 
     } catch (error) {
-      throw new Error('Error fetching user by ID: ' + error.message);  // Tratamento de erro
+      throw new Error('Error fetching user by ID: ' + error.message); 
     }
+  }
+
+  async createUser(user){
+    const users = await User.create(user);
+    return users;
   }
 }
 

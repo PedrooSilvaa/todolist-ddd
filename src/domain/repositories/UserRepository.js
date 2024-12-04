@@ -6,6 +6,11 @@ class UserRepository {
     async getById(id){
       throw new Error('Method not implemented');
     }
+
+    async createUser(user){
+      throw new Error('Method not implemented');
+    }
+    
   }
   
   export default UserRepository;
