@@ -3,15 +3,17 @@ import MySQLTaskRepository from '../infrastructure/persistence/MySQLTaskReposito
 import CreateTask from '../../application/usecases/CreateTask.js';
 import TaskController from '../controllers/TaskController.js';
 import GetAllTask from '../../application/usecases/GetAllTask.js';
+import GetAllByUser from '../../application/usecases/GetAllByUser.js';
 
 const router = express.Router();
 
 const taskRepository = new MySQLTaskRepository();
 const createTask = new CreateTask(taskRepository);
 const getAllTask = new GetAllTask(taskRepository);
-const taskController = new TaskController(createTask, getAllTask);
+const getAllByUser = new GetAllByUser(taskRepository);
+const taskController = new TaskController(createTask, getAllTask, getAllByUser);
 
 router.post('/tasks/:idUser', (req, res) => taskController.createTasks(req, res));
 router.get('/tasks', (req, res) => taskController.getAll(req, res));
-
+router.get('/tasks/:idUser', (req, res) => taskController.getAllByUser(req, res));
 export default router;

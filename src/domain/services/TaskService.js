@@ -10,4 +10,8 @@ class TaskService{
     async getAll(){
         return await this.taskRepository.getAll();
     }
+
+    async getAllByUser(id){
+        return await this.taskRepository.getAllByUser()
+    }
 }

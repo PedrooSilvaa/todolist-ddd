@@ -13,4 +13,11 @@ export default class MySQLTaskRepository extends TaskRepository{
         return taskResponse;
     }
 
+    async getAllByUser(id){
+        const taskReponse = await Task.findAll({
+            where:{userId: id}
+        })
+        return taskReponse;
+    }
+
 }

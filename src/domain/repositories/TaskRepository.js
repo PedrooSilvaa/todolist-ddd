@@ -7,6 +7,10 @@ class TaskRepository{
     async getAll(){
         throw new Error('Method not implemented');
     }
+    
+    async getAllByUser(id){
+        throw new Error('Method not implemented');
+    }
 }
 
 export default TaskRepository;
