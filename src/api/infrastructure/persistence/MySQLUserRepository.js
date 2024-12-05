@@ -1,6 +1,5 @@
 import UserRepository from '../../../domain/repositories/UserRepository.js';
 import User from '../../../domain/models/UserModel.js';
-import { where } from 'sequelize';
 
 class MySQLUserRepository extends UserRepository {
   async getAll() {
