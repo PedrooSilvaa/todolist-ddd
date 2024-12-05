@@ -14,6 +14,10 @@ class UserRepository {
     async deleteById(id){
       throw new Error('Method not implemented');
     }
+
+    async updateUser(id, user){
+      throw new Error('Method not implemented');
+    }
     
   }
   

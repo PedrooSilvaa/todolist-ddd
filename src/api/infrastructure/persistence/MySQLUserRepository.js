@@ -1,5 +1,6 @@
 import UserRepository from '../../../domain/repositories/UserRepository.js';
 import User from '../../../domain/models/UserModel.js';
+import { where } from 'sequelize';
 
 class MySQLUserRepository extends UserRepository {
   async getAll() {
@@ -23,19 +24,36 @@ class MySQLUserRepository extends UserRepository {
   }
 
   async deleteById(id){
-    const user = this.getById(id)
-    if(!user){
-      throw new Error("User not found")
-    }
     try{
+      const userExist = await this.getById(id);
+      if(!userExist){
+        return null;
+      }
       await User.destroy({
         where: {id: id}
       });
-      return "User deleted successfully"
+      return "User deleting successfully";
     } catch(error){
-      throw new Error('Error fetching user by ID: ' + error.message); 
+      throw new Error('Error deleting user by ID: ' + error.message); 
     }
   } 
+
+  async updateUser(id, user){
+    try{
+      const userResponse = await User.update(
+        {
+          nome: user.nome,
+          email: user.email
+        },
+        {
+          where: { id: id }
+        }
+      )
+      return this.getById(id);
+    } catch(error){
+      throw new Error('Error updating user by ID: ' + error.message);
+    }
+  }
 }
 
 export default MySQLUserRepository;
