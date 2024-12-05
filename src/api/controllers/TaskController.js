@@ -1,4 +1,4 @@
-class TaskController{
+export default class TaskController{
     constructor(createTask){
         this.createTask = createTask;
     }
@@ -17,5 +17,3 @@ class TaskController{
         }
     }
 }
-
-export default TaskController;

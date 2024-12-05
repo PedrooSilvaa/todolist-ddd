@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors"
 import userRoutes from './src/api/routes/userRoutes.js';
-import taskRoutes from './src/api/routes/taskRoutes.js';
+import taskRoutes from './src/api/routes/taskRouter.js';
 
 const app = express();
 const port = 3000;
