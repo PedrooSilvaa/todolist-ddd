@@ -8,4 +8,9 @@ export default class MySQLTaskRepository extends TaskRepository{
         return taskBody;
     }
 
+    async getAll(){
+        const taskResponse = await Task.findAll();
+        return taskResponse;
+    }
+
 }
