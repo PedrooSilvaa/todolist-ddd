@@ -4,6 +4,8 @@ import CreateTask from '../../application/usecases/CreateTask.js';
 import TaskController from '../controllers/TaskController.js';
 import GetAllTask from '../../application/usecases/GetAllTask.js';
 import GetAllByUser from '../../application/usecases/GetAllByUser.js';
+import DeleteTaskById from '../../application/usecases/DeleteTaskById.js';
+import UpdateById from '../../application/usecases/UpdateById.js';
 
 const router = express.Router();
 
@@ -11,9 +13,14 @@ const taskRepository = new MySQLTaskRepository();
 const createTask = new CreateTask(taskRepository);
 const getAllTask = new GetAllTask(taskRepository);
 const getAllByUser = new GetAllByUser(taskRepository);
-const taskController = new TaskController(createTask, getAllTask, getAllByUser);
+const deleteById = new DeleteTaskById(taskRepository);
+const updateById = new UpdateById(taskRepository);
+const taskController = new TaskController(createTask, getAllTask, getAllByUser, deleteById, updateById);
 
 router.post('/tasks/:idUser', (req, res) => taskController.createTasks(req, res));
 router.get('/tasks', (req, res) => taskController.getAll(req, res));
 router.get('/tasks/:idUser', (req, res) => taskController.getAllByUser(req, res));
+router.delete('/tasks/:id', (req, res) => taskController.delete(req, res));
+router.put('/tasks/:id', (req, res) => taskController.update(req, res));
+
 export default router;

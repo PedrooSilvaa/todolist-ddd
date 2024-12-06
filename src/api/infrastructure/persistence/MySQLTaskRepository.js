@@ -20,4 +20,24 @@ export default class MySQLTaskRepository extends TaskRepository{
         return taskReponse;
     }
 
+    async deleteById(id){
+        const task = await Task.destroy({
+            where: {id: id}
+        })
+        return task;
+    }
+
+    async updateById(id, task){
+        const tasks = await Task.update(
+        {
+            nome: task.nome,
+            descricao: task.descricao,
+            status: task.status
+        },
+        {
+            where: {id: id}
+        })
+        return Task.findOne({where:{id: id}})
+    }
+
 }

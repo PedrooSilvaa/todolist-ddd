@@ -17,6 +17,11 @@ const Task = sequelize.define("Task", {
     allowNull: false,
     unique: true,
   },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
   userId: {
     type: DataTypes.STRING,
     allowNull: false,

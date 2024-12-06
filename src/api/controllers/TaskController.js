@@ -1,8 +1,10 @@
 export default class TaskController{
-    constructor(createTask, getAllTask, getAllTaskByUser){
+    constructor(createTask, getAllTask, getAllTaskByUser, deleteById, updateById){
         this.createTask = createTask;
         this.getAllTask = getAllTask;
         this.getAllTaskByUser = getAllTaskByUser;
+        this.deleteById = deleteById;
+        this.updateById = updateById;
     }
 
     async createTasks(req, res){
@@ -10,6 +12,7 @@ export default class TaskController{
             const task ={
                 nome: req.body.nome,
                 descricao: req.body.descricao,
+                status: 'Backlog',
                 userId: req.params.idUser
             }
             const tasks = await this.createTask.execute(task);
@@ -33,6 +36,31 @@ export default class TaskController{
             const idUser = req.params.idUser;
             const tasks = await this.getAllTaskByUser.execute(idUser);
             res.status(200).json(tasks);
+        }catch(error){
+            res.status(500).json({error: error.message})
+        }
+    }
+
+    async delete(req, res){
+        try{
+            const id = req.params.id;
+            await this.deleteById.execute(id);
+            res.status(200).json('Task deleted successfully')
+        }catch(error){
+            res.status(500).json({error: error.message})
+        }
+    }
+
+    async update(req, res){
+        try{
+            const id = req.params.id;
+            const task = {
+                nome: req.body.nome,
+                descricao: req.body.descricao,
+                status: req.body.status
+            }
+            const tasks = await this.updateById.execute(id, task);
+            res.status(200).json(tasks)
         }catch(error){
             res.status(500).json({error: error.message})
         }

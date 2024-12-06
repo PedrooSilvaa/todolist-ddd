@@ -12,6 +12,14 @@ class TaskService{
     }
 
     async getAllByUser(id){
-        return await this.taskRepository.getAllByUser()
+        return await this.taskRepository.getAllByUser(id)
+    }
+
+    async deleteById(id){
+        return await this.taskRepository.deleteById(id)
+    }
+
+    async updateById(id, task){
+        return await this.taskRepository.updateById(id, task);
     }
 }
