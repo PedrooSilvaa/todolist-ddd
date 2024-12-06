@@ -40,4 +40,8 @@ export default class MySQLTaskRepository extends TaskRepository{
         return Task.findOne({where:{id: id}})
     }
 
+    async getById(id){
+        const task = Task.findOne({where:{id: id}});
+        return task;
+    }
 }

@@ -1,10 +1,11 @@
 export default class TaskController{
-    constructor(createTask, getAllTask, getAllTaskByUser, deleteById, updateById){
+    constructor(createTask, getAllTask, getAllTaskByUser, deleteById, updateById, getTaskById){
         this.createTask = createTask;
         this.getAllTask = getAllTask;
         this.getAllTaskByUser = getAllTaskByUser;
         this.deleteById = deleteById;
         this.updateById = updateById;
+        this.getTaskById = getTaskById;
     }
 
     async createTasks(req, res){
@@ -61,6 +62,16 @@ export default class TaskController{
             }
             const tasks = await this.updateById.execute(id, task);
             res.status(200).json(tasks)
+        }catch(error){
+            res.status(500).json({error: error.message})
+        }
+    }
+
+    async getById(req, res){
+        try{
+            const id = req.params.id;
+            const task = await this.getTaskById.execute(id);
+            res.status(200).json(task)
         }catch(error){
             res.status(500).json({error: error.message})
         }

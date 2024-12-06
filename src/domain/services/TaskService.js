@@ -22,4 +22,8 @@ class TaskService{
     async updateById(id, task){
         return await this.taskRepository.updateById(id, task);
     }
+
+    async getById(id){
+        return await this.taskRepository.getById(id);
+    }
 }
